@@ -14,7 +14,7 @@ router.post('/set/:horaini', function(req, res, next){
 	console.log(req.params.horaini);
 	console.log(req.body.datos);
 	res.sendStatus(200);
-	fs.writeFile("datos/" + req.params.horaini + ".csv", req.body.datos, function(err){
+	fs.writeFile("datos/" + req.params.horaini + "_" + new Date().getTime() + ".csv", req.body.datos, function(err){
 		if(err == null){
 			console.log("Fichero " + req.params.horaini + " guardado OK");
 		}else{
