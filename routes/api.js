@@ -1,11 +1,71 @@
 var express = require('express');
 var fs = require('fs');
+var csv = require('csv');
+var glob = require('glob');
+var async = require('async');
 var router = express.Router();
 
 /* GET users listing. */
 
 router.get('/set/:horaini/:horafin', function(req, res, next){
 	res.json(req.params);
+});
+
+router.get('/geth/:horaini/:horafin', function(req, res,next){
+	//console.log(req.params.horaini);
+	//console.log(req.params.horafin);
+	
+	glob("datos/*?_*.csv", null, function (er, files) {
+		//console.log(er);
+		console.log(files);
+		var ficheros = [];
+		for(var i=0;i<files.length; i++){
+			var horas = files[i].split("/")[1].split("_");
+			horas[1] = horas[1].split(".csv")[0];
+			var fichero = {
+				path: files[i],
+				inicioRemoto: horas[0],
+				inicioLocal: horas[1]
+			}
+			ficheros.push(fichero);
+		}
+		var minDef = 292278994; // Max epoch?
+		var selectedIni = null;
+		var last = null;
+		var selected = [];
+		for(var i=0;i<ficheros.length; i++){
+			if(ficheros[i].inicioRemoto - req.params.horaini < minDef){
+				minDef = req.params.horaini - ficheros[i].inicioRemoto;
+				selectedIni = ficheros[i];
+				console.log(minDef);
+			}
+		}
+		for(var i=0;i<ficheros.length; i++){
+			if(ficheros[i].inicioRemoto >= selectedIni.inicioRemoto && ficheros[i].inicioRemoto <= req.params.horafin){
+				console.log("Pushed:" + ficheros[i].inicioRemoto + " >= " + selectedIni.inicioRemoto + " && " + ficheros[i].inicioRemoto + " <= " + req.params.horafin);
+				selected.push(ficheros[i]);
+			}else{
+				console.log("Not pushed:" + ficheros[i].inicioRemoto + " >= " + selectedIni.inicioRemoto + " && " + ficheros[i].inicioRemoto + " <= " + req.params.horafin);
+			}
+		}
+
+		async.map(selected, function(elem, callback){
+			var data = fs.readFileSync(elem.path);
+			csv.parse(data, {relax_column_count:true}, function(errorCsv, output){
+				callback(null, output);
+			});
+		}, function(err,result){
+			var r = [];
+			for(var i=0;i<result.length;i++){
+				for(var j=0;j<result[i].length;j++){
+					r.push(result[i][j]);				
+				}
+
+			}
+			res.json(r);
+		});
+	});
+	//res.sendStatus(200);
 });
 
 router.post('/set/:horaini', function(req, res, next){
