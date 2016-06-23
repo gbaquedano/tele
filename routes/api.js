@@ -41,7 +41,7 @@ router.get('/geth/:horaini/:horafin', function(req, res,next){
 			}
 		}
 		for(var i=0;i<ficheros.length; i++){
-			if(ficheros[i].inicioRemoto >= selectedIni.inicioRemoto && ficheros[i].inicioRemoto <= req.params.horafin){
+			if(true || ficheros[i].inicioRemoto >= selectedIni.inicioRemoto && ficheros[i].inicioRemoto <= req.params.horafin){
 				console.log("Pushed:" + ficheros[i].inicioRemoto + " >= " + selectedIni.inicioRemoto + " && " + ficheros[i].inicioRemoto + " <= " + req.params.horafin);
 				selected.push(ficheros[i]);
 			}else{
