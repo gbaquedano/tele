@@ -14,7 +14,7 @@ html
 		var inicio = "#{inicio}";
 		var fin = "#{fin}";
 		console.log("Graficando desde " + inicio + " hasta " + fin);
-		$.getJSON('http://http://92.222.84.155:3443/api/geth/' + inicio + '/' + fin, function(data){
+		$.getJSON('http://92.222.84.155:3443/api/geth/' + inicio + '/' + fin, function(data){
 			// Filtramos por numero de trama
 			var datos = [];
 			for(var i = 0; i < data.length; i++){
