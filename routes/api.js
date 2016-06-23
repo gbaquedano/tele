@@ -51,7 +51,7 @@ router.get('/geth/:horaini/:horafin', function(req, res,next){
 
 		async.map(selected, function(elem, callback){
 			var data = fs.readFileSync(elem.path);
-			csv.parse(data, {relax_column_count:true}, function(errorCsv, output){
+			csv.parse(data, {relax_column_count:true, auto_parse:true}, function(errorCsv, output){
 				callback(null, output);
 			});
 		}, function(err,result){

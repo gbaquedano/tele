@@ -5,9 +5,8 @@
  */
 
 var app = require('../app');
-var debug = require('debug')('telesrv:server');
+var debug = require('debug')('tele2:server');
 var http = require('http');
-var fs = require('fs');
 
 /**
  * Get port from environment and store in Express.
@@ -17,14 +16,8 @@ var port = normalizePort(process.env.PORT || '3443');
 app.set('port', port);
 
 /**
- * Create HTTPS server.
+ * Create HTTP server.
  */
-/*
-var options = {
-  key: fs.readFileSync('./rsa.pem'),
-  cert: fs.readFileSync('./file.crt')
-};
-*/
 
 var server = http.createServer(app);
 
