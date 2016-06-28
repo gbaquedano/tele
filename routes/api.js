@@ -11,7 +11,7 @@ router.get('/set/:horaini/:horafin', function(req, res, next){
 	res.json(req.params);
 });
 
-router.get('/geth/:horaini/:horafin', function(req, res,next){
+router.get('/geth/:horaini/:horafin/:grupo/:sensor', function(req, res,next){
 	//console.log(req.params.horaini);
 	//console.log(req.params.horafin);
 	
@@ -48,21 +48,29 @@ router.get('/geth/:horaini/:horafin', function(req, res,next){
 				console.log("Not pushed:" + ficheros[i].inicioRemoto + " >= " + selectedIni.inicioRemoto + " && " + ficheros[i].inicioRemoto + " <= " + req.params.horafin);
 			}
 		}
-
+var grupo=req.params.grupo;
+var sensor=req.params.sensor;
 		async.map(selected, function(elem, callback){
 			var data = fs.readFileSync(elem.path);
 			csv.parse(data, {relax_column_count:true, auto_parse:true}, function(errorCsv, output){
 				callback(null, output);
 			});
 		}, function(err,result){
+console.log("sensor, grupo: "+sensor+","+grupo);
 			var r = [];
 			for(var i=0;i<result.length;i++){
 				for(var j=0;j<result[i].length;j++){
 					r.push(result[i][j]);				
 				}
-
 			}
-			res.json(r);
+//console.log("valor a escribir: "+r[1][1]);
+			var r2=[];
+			for (var k=0;k<r.length;k++){
+				if(r[k][1]==grupo){
+					r2.push([r[k][0], r[k][parseInt(sensor)+2]]);
+				}
+			}
+			res.json(r2);
 		});
 	});
 	//res.sendStatus(200);

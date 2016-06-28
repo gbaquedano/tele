@@ -13,14 +13,16 @@ html
 		$(function () {
 		var inicio = "#{inicio}";
 		var fin = "#{fin}";
+		var grupo = "#{grupo}";
+		var sensor = "#{sensor}";
 		console.log("Graficando desde " + inicio + " hasta " + fin);
-		$.getJSON('http://92.222.84.155:3443/api/geth/' + inicio + '/' + fin, function(data){
+		$.getJSON('http://92.222.84.155:3443/api/geth/' + inicio + '/' + fin + '/'+ grupo + '/' + sensor, function(data){
 			// Filtramos por numero de trama
 			var datos = [];
 			for(var i = 0; i < data.length; i++){
-				if( data[i][1] == 4 ){
+				//if( data[i][1] == 4 ){
 					datos.push([data[i][0], data[i][2]]);
-				}
+				//}
 			}
 			console.log(data);
 			console.log(datos);
