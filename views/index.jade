@@ -1,7 +1,13 @@
 extends layout
 
 block content
-  h1= title
-  p Mostrando #{title} desde #{inicio} a #{fin}
-  #container(style={ 'min-width':'310px', height:'400px',margin:'0 auto' })
+  div(ng-app='telemetria')
+    div(ng-controller='graficarCtrl')
+      h1 {{greeting}}
+      h1= title
+      select(ng-model='seleccionados', multiple)
+        option(ng-repeat='opcion in diccionarioObj',value='{{opcion}}')#[{{opcion.nombre}}]
+      button(ng-click='addSensors(seleccionados)')#[|Añadir]
+      p Mostrando #{title} desde #{inicio} a #{fin}
+      #container(style={ 'min-width':'310px', height:'400px',margin:'0 auto' })
 
