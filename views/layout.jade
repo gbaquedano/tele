@@ -21,7 +21,7 @@ html
 			var datos = [];
 			for(var i = 0; i < data.length; i++){
 				//if( data[i][1] == 4 ){
-					datos.push([data[i][0], data[i][2]]);
+					datos.push([data[i][0], data[i][1]]);
 				//}
 			}
 			console.log(data);
@@ -29,6 +29,9 @@ html
 
 			$('#container').highcharts({
 
+				chart: {
+					zoomType: 'x'
+				},
 				title: {
 				    text: 'Gráfico de telemetría'
 				},
@@ -89,6 +92,20 @@ html
 				},
 
 				plotOptions: {
+				area: {
+					fillColor: {
+						linearGradient: {
+							x1: 0,
+							y1: 0,
+							x2: 0,
+							y2: 1
+						},
+					stops: [
+						[0, Highcharts.getOptions().colors[0]],
+						[1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+					]
+				}
+				},
 				    series: {
 				        cursor: 'pointer',
 				        point: {
@@ -102,8 +119,9 @@ html
 				},
 
 				series: [{
+				type: 'area',
 				    name: 'Potenciómetro',
-			    	data: datos,
+					data: datos,
 				    lineWidth: 4,
 				    marker: {
 				        radius: 4
