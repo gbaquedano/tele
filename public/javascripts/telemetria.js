@@ -1,4 +1,4 @@
-var telemetria = angular.module('telemetria',[]);
+﻿var telemetria = angular.module('telemetria',[]);
 
 telemetria.controller('graficarCtrl', function($scope, $http) {
 	$scope.greeting = 'Hola!';
@@ -20,6 +20,14 @@ telemetria.controller('graficarCtrl', function($scope, $http) {
 		console.log(sensores);
 		for(var i = 0; i < sensores.length; i++){
 			$scope.graficados.push(sensores[i]);
+		}
+		// Añadir refrescado de gráfico
+	}
+	$scope.removeSensors = function(sensores){
+		console.log(sensores);
+		for(var i = 0; i < sensores.length; i++){
+			if(sensores[i].nombre==$scope.graficados[i].nombre)
+				
 		}
 		// Añadir refrescado de gráfico
 	}
