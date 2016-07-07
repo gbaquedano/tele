@@ -77,12 +77,9 @@ telemetria.controller('graficarCtrl', function($scope, $http) {
 							datos.push([data[i][0], data[i][1]]);
 						//}
 					}
-					scope.datos = datos;
-				});
-			});
-			scope.$watch('datos', function(newval, oldval){
-				if(newval && newval.length > 0){
-				$('#' + scope.obj.id_trama + '_' + scope.obj.offset).highcharts({
+					//scope.datos = datos;
+
+					$('#' + scope.obj.id_trama + '_' + scope.obj.offset).highcharts({
 
 					chart: {
 						zoomType: 'x'
@@ -176,14 +173,14 @@ telemetria.controller('graficarCtrl', function($scope, $http) {
 					series: [{
 					type: 'area',
 					    name: scope.obj.nombre,
-                    			    data: newval,
+                    			    data: datos,
 					    lineWidth: 4,
 					    marker: {
 					        radius: 4
 					    }
 					}]
 				});
-				}
+				});
 			});
     	}
     }
