@@ -61,7 +61,7 @@ telemetria.controller('graficarCtrl', function($scope, $http) {
 			id:"=id"
         },
         link: function (scope, element, attrs) {
-        	scope.datos = [];
+        	//scope.datos = [];
 			scope.$watch('id', function(newval,oldval){
 				console.log(newval);
 
