@@ -81,6 +81,7 @@ telemetria.controller('graficarCtrl', function($scope, $http) {
 				});
 			});
 			scope.$watch('datos', function(newval, oldval){
+				console.log(newval);
 				$('#' + scope.obj.id_trama + '_' + scope.obj.offset).highcharts({
 
 					chart: {
