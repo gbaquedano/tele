@@ -1,5 +1,21 @@
 ﻿var telemetria = angular.module('telemetria',[]);
 
+telemetria.config(['$httpProvider', function($httpProvider) {
+    //initialize get if not there
+    if (!$httpProvider.defaults.headers.get) {
+        $httpProvider.defaults.headers.get = {};    
+    }    
+
+    // Answer edited to include suggestions from comments
+    // because previous version of code introduced browser-related errors
+
+    //disable IE ajax request caching
+    $httpProvider.defaults.headers.get['If-Modified-Since'] = 'Mon, 26 Jul 1997 05:00:00 GMT';
+    // extra
+    $httpProvider.defaults.headers.get['Cache-Control'] = 'no-cache';
+    $httpProvider.defaults.headers.get['Pragma'] = 'no-cache';
+}]);
+
 telemetria.controller('graficarCtrl', function($scope, $http) {
 	$scope.greeting = 'Hola!';
 	$scope.graficados = [];
@@ -159,7 +175,7 @@ telemetria.controller('graficarCtrl', function($scope, $http) {
 					series: [{
 					type: 'area',
 					    name: scope.obj.nombre,
-						data: scope.datos,
+                    			    data: newval,
 					    lineWidth: 4,
 					    marker: {
 					        radius: 4
