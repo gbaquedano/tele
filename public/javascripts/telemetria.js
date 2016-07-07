@@ -53,7 +53,7 @@ telemetria.controller('graficarCtrl', function($scope, $http) {
 				var sensor = scope.obj.offset;
 				console.log("Graficando desde " + scope.inicio + " hasta " + scope.fin);
 				//92.222.84.155:3443
-				$.getJSON('http://localhost:3443/api/geth/' + scope.inicio + '/' + scope.fin + '/'+ grupo + '/' + sensor, function(data){
+				$.getJSON('http://92.222.84.155:3443/api/geth/' + scope.inicio + '/' + scope.fin + '/'+ grupo + '/' + sensor, function(data){
 					// Filtramos por numero de trama
 					var datos = [];
 					for(var i = 0; i < data.length; i++){
