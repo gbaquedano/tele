@@ -43,7 +43,7 @@ router.get('/geth/:horaini/:horafin/:grupo/:sensor', function(req, res,next){
 		}
 		for(var i=0;i<ficheros.length; i++){
 			if(true || ficheros[i].inicioRemoto >= selectedIni.inicioRemoto && ficheros[i].inicioRemoto <= req.params.horafin){
-				console.log("Pushed:" + ficheros[i].inicioRemoto + " >= " + selectedIni.inicioRemoto + " && " + ficheros[i].inicioRemoto + " <= " + req.params.horafin);
+				//console.log("Pushed:" + ficheros[i].inicioRemoto + " >= " + selectedIni.inicioRemoto + " && " + ficheros[i].inicioRemoto + " <= " + req.params.horafin);
 				selected.push(ficheros[i]);
 			}else{
 				console.log("Not pushed:" + ficheros[i].inicioRemoto + " >= " + selectedIni.inicioRemoto + " && " + ficheros[i].inicioRemoto + " <= " + req.params.horafin);
