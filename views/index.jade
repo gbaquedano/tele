@@ -5,10 +5,14 @@ block content
     div(ng-controller='graficarCtrl')
       //h1 {{greeting}}
       h1= title
+      h2 Mostrando #{title} desde #{moment(Number(inicio)).format('HH:mm:s,SSS DD/MMM/YYYY')} a #{moment(Number(fin)).format('HH:mm:s,SSS DD/MMM/YYYY')}
+      h3 Sensores disponibles:
       select(ng-model='seleccionados', multiple, ng-options='opcion.nombre for opcion in diccionarioObj track by opcion.nombre')
+      h4 Sensores a mostrar:
+      select(ng-model='seleccionadosQuitar', multiple, ng-options='opcion.nombre for opcion in graficados track by opcion.nombre')
         //option(ng-repeat='opcion in diccionarioObj',value='opcion track by opcion.nombre')#[{{opcion.nombre}}]
       button(ng-click='addSensors(seleccionados)')#[|Añadir]
-      p Mostrando #{title} desde #{moment(Number(inicio)).format('HH:mm:s,SSS DD/MMM/YYYY')} a #{moment(Number(fin)).format('HH:mm:s,SSS DD/MMM/YYYY')}
+      button(ng-click='removeSensors(seleccionadosQuitar)')#[|Quitar]
       grafico(ng-repeat='parametro in graficados',id='parametro.id_trama + \"_\" + parametro.offset', inicio='#{inicio}',fin='#{fin}',obj='parametro')
       #container(style={ 'min-width':'310px', height:'200px',margin:'0 auto' })
 

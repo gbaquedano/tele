@@ -35,15 +35,18 @@ telemetria.controller('graficarCtrl', function($scope, $http) {
 	$scope.addSensors = function(sensores){
 		console.log(sensores);
 		for(var i = 0; i < sensores.length; i++){
-			$scope.graficados.push(sensores[i]);
+            if ($scope.graficados.indexOf(sensores[i])==-1)
+                $scope.graficados.push(sensores[i]);
 		}
 		// Añadir refrescado de gráfico
 	}
 	$scope.removeSensors = function(sensores){
 		console.log(sensores);
 		for(var i = 0; i < sensores.length; i++){
-			//if(sensores[i].nombre==$scope.graficados[i].nombre)
-				
+            for(var j = 0; j < $scope.graficados.length; j++){
+                if(sensores[i].id_trama==$scope.graficados[j].id_trama && sensores[i].offset==$scope.graficados[j].offset)
+                    $scope.graficados.splice(j, 1);
+            }
 		}
 		// Añadir refrescado de gráfico
 	}
