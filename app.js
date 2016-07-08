@@ -9,8 +9,10 @@ var routes = require('./routes/index');
 var api = require('./routes/api');
 var users = require('./routes/users');
 
+var moment=require('moment');
+
 var app = express();
-app.locals.moment = require('moment');
+app.locals.moment = moment;
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
