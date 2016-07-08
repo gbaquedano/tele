@@ -18,8 +18,8 @@ router.get('/geth/:horaini/:horafin/:grupo/:sensor', function(req, res,next){
 	
 	glob("datos/*?_*.csv", null, function (er, files) {
 		//console.log(er);
-		req.params.horaini = req.params.horaini / 1000;
-		req.params.horafin = req.params.horafin / 1000;
+		//req.params.horaini = req.params.horaini / 1000;
+		//req.params.horafin = req.params.horafin / 1000;
 		//console.log("HoraIni:" + req.params.horaini);
 		//console.log("HoraFin:" + req.params.horafin);
 		//console.log(files);
