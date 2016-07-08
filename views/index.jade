@@ -3,12 +3,12 @@ extends layout
 block content
   div(ng-app='telemetria')
     div(ng-controller='graficarCtrl')
-      h1 {{greeting}}
+      //h1 {{greeting}}
       h1= title
       select(ng-model='seleccionados', multiple, ng-options='opcion.nombre for opcion in diccionarioObj track by opcion.nombre')
         //option(ng-repeat='opcion in diccionarioObj',value='opcion track by opcion.nombre')#[{{opcion.nombre}}]
       button(ng-click='addSensors(seleccionados)')#[|Añadir]
-      p Mostrando #{title} desde #{inicio} a #{fin}
+      p Mostrando #{title} desde #{moment(Number(inicio)).format('HH:mm:s,SSS DD/MMM/YYYY')} a #{moment(Number(fin)).format('HH:mm:s,SSS DD/MMM/YYYY')}
       grafico(ng-repeat='parametro in graficados',id='parametro.id_trama + \"_\" + parametro.offset', inicio='#{inicio}',fin='#{fin}',obj='parametro')
-      #container(style={ 'min-width':'310px', height:'400px',margin:'0 auto' })
+      #container(style={ 'min-width':'310px', height:'200px',margin:'0 auto' })
 

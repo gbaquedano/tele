@@ -10,6 +10,7 @@ var api = require('./routes/api');
 var users = require('./routes/users');
 
 var app = express();
+app.locals.moment = require('moment');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
