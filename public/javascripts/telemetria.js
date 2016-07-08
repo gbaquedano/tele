@@ -83,7 +83,7 @@ telemetria.controller('graficarCtrl', function($scope, $http) {
 					}
 					//scope.datos = datos;
 
-					$('#' + scope.obj.id_trama + '_' + scope.obj.offset).highcharts({
+					var chart = $('#' + scope.obj.id_trama + '_' + scope.obj.offset).highcharts({
 
 						chart: {
 							zoomType: 'x'
@@ -187,13 +187,13 @@ telemetria.controller('graficarCtrl', function($scope, $http) {
 
 					setInterval(function(){
 						$.getJSON(url + '/api/geth/' + scope.inicio + '/' + scope.fin + '/'+ grupo + '/' + sensor, function(data){
-							// Filtramos por numero de trama
 							datos.length = 0;
 							for(var i = 0; i < data.length; i++){
 								//if( data[i][1] == 4 ){
 									datos.push([data[i][0], data[i][1]]);
 								//}
 							}
+							chart.highcharts().series[0].setData(datos,true);
 						});
 					},2000);
 				});
