@@ -34,7 +34,7 @@ router.get('/geth/:horaini/:horafin/:grupo/:sensor', function(req, res,next){
 			}
 			ficheros.push(fichero);
 		}
-		var minDef = 292278994; // Max epoch?
+		var minDef = 292278994000; // Max epoch?
 		var selectedIni = null;
 		var last = null;
 		var selected = [];
