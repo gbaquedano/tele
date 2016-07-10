@@ -1,18 +1,20 @@
 extends layout
 
 block content
-  div(ng-app='telemetria')
-    div(ng-controller='graficarCtrl')
-      //h1 {{greeting}}
-      h1= title
-      h2 Mostrando #{title} desde #{moment(Number(inicio)).format('HH:mm:s,SSS DD/MMM/YYYY')} a #{moment(Number(fin)).format('HH:mm:s,SSS DD/MMM/YYYY')}
-      h3 Sensores disponibles:
-      select(ng-model='seleccionados', multiple, ng-options='opcion.nombre for opcion in diccionarioObj track by opcion.nombre')
-      h4 Sensores a mostrar:
-      select(ng-model='seleccionadosQuitar', multiple, ng-options='opcion.nombre for opcion in graficados track by opcion.nombre')
-        //option(ng-repeat='opcion in diccionarioObj',value='opcion track by opcion.nombre')#[{{opcion.nombre}}]
-      button(ng-click='addSensors(seleccionados)')#[|Añadir]
-      button(ng-click='removeSensors(seleccionadosQuitar)')#[|Quitar]
-      grafico(ng-repeat='parametro in graficados',id='parametro.id_trama + \"_\" + parametro.offset', inicio='#{inicio}',fin='#{fin}',obj='parametro')
-      #container(style={ 'min-width':'310px', height:'200px',margin:'0 auto' })
+    div(ng-app='telemetria')
+        div(ng-controller='graficarCtrl')
+            h2 Mostrando #{title}
+            h3 Desde #{moment(Number(inicio)).format('DD/MMM/YYYY HH:mm:s.S')} 
+            h3 Hasta #{moment(Number(fin)).format('DD/MMM/YYYY HH:mm:s.S')}
+            div(class="col-xs-12 col-sm-6 col-md-6 col-lg-6")
+                h3 Sensores disponibles:
+                select(style="width:100%;" size="10" ng-model='seleccionados', multiple, ng-options='opcion.nombre for opcion in diccionarioObj track by opcion.nombre')
+                button(style="width:100%;" ng-click='addSensors(seleccionados)')#[|Añadir]
+            div(class="col-xs-12 col-sm-6 col-md-6 col-lg-6")
+                h3 Sensores a mostrar:
+                select(style="width:100%;" size="10" ng-model='seleccionadosQuitar', multiple, ng-options='opcion.nombre for opcion in graficados track by opcion.nombre')
+                button(style="width:100%;" ng-click='removeSensors(seleccionadosQuitar)')#[|Quitar]
+            //option(ng-repeat='opcion in diccionarioObj',value='opcion track by opcion.nombre')#[{{opcion.nombre}}]
+            grafico(ng-repeat='parametro in graficados',id='parametro.id_trama + \"_\" + parametro.offset', inicio='#{inicio}',fin='#{fin}',obj='parametro')
+            #container(style={ 'min-width':'310px', height:'200px',margin:'0 auto' })
 

@@ -13,8 +13,8 @@ router.get('/unixtimes/:inicio/:fin/', function(req, res, next) {
 });
 
 router.get('/:inicio/:fin/', function(req, res, next) {
-  console.log(moment(req.params.inicio, "DD-MM-YYYY-HH-mm-ss").milliseconds());
-  res.render('index', { title: 'Telemetría', inicio: moment(req.params.inicio, "DD-MM-YYYY-HH-mm-ss").milliseconds(), fin: req.params.fin});
+  console.log(moment(req.params.inicio, "DD-MM-YYYY-HH-mm-ss").valueOf());
+  res.render('index', { title: 'Telemetría', inicio: moment(req.params.inicio, "DD-MM-YYYY-HH-mm-ss").valueOf(), fin: moment(req.params.fin, "DD-MM-YYYY-HH-mm-ss").valueOf()});
 });
 
 module.exports = router;

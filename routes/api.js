@@ -18,7 +18,11 @@ router.get('/geth/:horaini/:horafin/:grupo/:sensor', function(req, res,next){
 	
 	glob("datos/*?_*.csv", null, function (er, files) {
 		//console.log(er);
-		console.log(files);
+		//req.params.horaini = req.params.horaini / 1000;
+		//req.params.horafin = req.params.horafin / 1000;
+		//console.log("HoraIni:" + req.params.horaini);
+		//console.log("HoraFin:" + req.params.horafin);
+		//console.log(files);
 		var ficheros = [];
 		for(var i=0;i<files.length; i++){
 			var horas = files[i].split("/")[1].split("_");
@@ -30,19 +34,20 @@ router.get('/geth/:horaini/:horafin/:grupo/:sensor', function(req, res,next){
 			}
 			ficheros.push(fichero);
 		}
-		var minDef = 292278994; // Max epoch?
+		var minDef = 292278994000; // Max epoch?
 		var selectedIni = null;
 		var last = null;
 		var selected = [];
 		for(var i=0;i<ficheros.length; i++){
-			if(ficheros[i].inicioRemoto - req.params.horaini < minDef){
-				minDef = req.params.horaini - ficheros[i].inicioRemoto;
+			if(Math.abs(ficheros[i].inicioRemoto - req.params.horaini) < minDef){
+				minDef = Math.abs(req.params.horaini - ficheros[i].inicioRemoto);
 				selectedIni = ficheros[i];
-				console.log(minDef);
 			}
 		}
+		//console.log("MinDef:" + minDef);
+		//console.log("Seleccionado de inicio:" + selectedIni.inicioRemoto);
 		for(var i=0;i<ficheros.length; i++){
-			if(true || ficheros[i].inicioRemoto >= selectedIni.inicioRemoto && ficheros[i].inicioRemoto <= req.params.horafin){
+			if(ficheros[i].inicioRemoto >= selectedIni.inicioRemoto && ficheros[i].inicioRemoto <= req.params.horafin){
 				//console.log("Pushed:" + ficheros[i].inicioRemoto + " >= " + selectedIni.inicioRemoto + " && " + ficheros[i].inicioRemoto + " <= " + req.params.horafin);
 				selected.push(ficheros[i]);
 			}else{
