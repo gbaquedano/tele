@@ -3,17 +3,24 @@ extends layout
 block content
     div(ng-app='telemetria')
         div(ng-controller='graficarCtrl')
-            h2 Mostrando #{title}
-            h3 Desde #{moment(Number(inicio)).format('DD/MMM/YYYY HH:mm:s.S')} 
-            h3 Hasta #{moment(Number(fin)).format('DD/MMM/YYYY HH:mm:s.S')}
-            div(class="col-xs-12 col-sm-6 col-md-6 col-lg-6")
-                h3 Sensores disponibles:
-                select(style="width:100%;" size="10" ng-model='seleccionados', multiple, ng-options='opcion.nombre for opcion in diccionarioObj track by opcion.nombre')
-                button(style="width:100%;" ng-click='addSensors(seleccionados)')#[|Añadir]
-            div(class="col-xs-12 col-sm-6 col-md-6 col-lg-6")
-                h3 Sensores a mostrar:
-                select(style="width:100%;" size="10" ng-model='seleccionadosQuitar', multiple, ng-options='opcion.nombre for opcion in graficados track by opcion.nombre')
-                button(style="width:100%;" ng-click='removeSensors(seleccionadosQuitar)')#[|Quitar]
-            //option(ng-repeat='opcion in diccionarioObj',value='opcion track by opcion.nombre')#[{{opcion.nombre}}]
-            grafico(ng-repeat='parametro in graficados',id='parametro.id_trama + \"_\" + parametro.offset', inicio='#{inicio}',fin='#{fin}',obj='parametro')
-            #container(style={ 'min-width':'310px', height:'200px',margin:'0 auto' })
+            div(class="panel-heading encabezado")
+                div(class="row vcenter")
+                        div(class="col-xs-12 col-sm-4")
+                            img(class="img-responsive" alt="" src="/images/portadaMin.png")
+                        div(class="col-xs-12 col-sm-8")
+                            h1 Mostrando #{title}
+                            h3 Desde #{moment(Number(inicio)).format('DD/MMM/YYYY HH:mm:s.S')} 
+                            h3 Hasta #{moment(Number(fin)).format('DD/MMM/YYYY HH:mm:s.S')}
+                    
+            div(class="panel-content")
+                div(class="col-xs-12 col-sm-6 col-md-6 col-lg-6 bs-callout bs-callout-danger")
+                    h3 Sensores disponibles:
+                    select(style="width:100%;" size="10" ng-model='seleccionados', multiple, ng-options='opcion.nombre for opcion in diccionarioObj track by opcion.nombre')
+                    button(style="width:100%;" ng-click='addSensors(seleccionados)')#[|Añadir]
+                div(class="col-xs-12 col-sm-6 col-md-6 col-lg-6 bs-callout bs-callout-danger")
+                    h3 Sensores a mostrar:
+                    select(style="width:100%;" size="10" ng-model='seleccionadosQuitar', multiple, ng-options='opcion.nombre for opcion in graficados track by opcion.nombre')
+                    button(style="width:100%;" ng-click='removeSensors(seleccionadosQuitar)')#[|Quitar]
+                //option(ng-repeat='opcion in diccionarioObj',value='opcion track by opcion.nombre')#[{{opcion.nombre}}]
+                grafico(ng-repeat='parametro in graficados',id='parametro.id_trama + \"_\" + parametro.offset', inicio='#{inicio}',fin='#{fin}',obj='parametro')
+                #container(style={ 'min-width':'310px', height:'200px',margin:'0 auto' })
