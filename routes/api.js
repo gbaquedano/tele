@@ -44,8 +44,8 @@ router.get('/geth/:horaini/:horafin/:grupo/:sensor', function(req, res,next){
 				selectedIni = ficheros[i];
 			}
 		}
-		//console.log("MinDef:" + minDef);
-		//console.log("Seleccionado de inicio:" + selectedIni.inicioRemoto);
+		console.log("MinDef:" + minDef);
+		console.log("Seleccionado de inicio:" + selectedIni.inicioRemoto);
 		for(var i=0;i<ficheros.length; i++){
             if(ficheros[i]){
                 if(ficheros[i].inicioRemoto >= selectedIni.inicioRemoto && ficheros[i].inicioRemoto <= req.params.horafin){
