@@ -47,12 +47,14 @@ router.get('/geth/:horaini/:horafin/:grupo/:sensor', function(req, res,next){
 		//console.log("MinDef:" + minDef);
 		//console.log("Seleccionado de inicio:" + selectedIni.inicioRemoto);
 		for(var i=0;i<ficheros.length; i++){
-			if(ficheros[i].inicioRemoto >= selectedIni.inicioRemoto && ficheros[i].inicioRemoto <= req.params.horafin){
-				//console.log("Pushed:" + ficheros[i].inicioRemoto + " >= " + selectedIni.inicioRemoto + " && " + ficheros[i].inicioRemoto + " <= " + req.params.horafin);
-				selected.push(ficheros[i]);
-			}else{
-				console.log("Not pushed:" + ficheros[i].inicioRemoto + " >= " + selectedIni.inicioRemoto + " && " + ficheros[i].inicioRemoto + " <= " + req.params.horafin);
-			}
+            if(ficheros[i]){
+                if(ficheros[i].inicioRemoto >= selectedIni.inicioRemoto && ficheros[i].inicioRemoto <= req.params.horafin){
+                    //console.log("Pushed:" + ficheros[i].inicioRemoto + " >= " + selectedIni.inicioRemoto + " && " + ficheros[i].inicioRemoto + " <= " + req.params.horafin);
+                    selected.push(ficheros[i]);
+                }else{
+                    console.log("Not pushed:" + ficheros[i].inicioRemoto + " >= " + selectedIni.inicioRemoto + " && " + ficheros[i].inicioRemoto + " <= " + req.params.horafin);
+                }
+            }
 		}
 var grupo=req.params.grupo;
 var sensor=req.params.sensor;
