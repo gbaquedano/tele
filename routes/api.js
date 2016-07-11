@@ -67,7 +67,7 @@ console.log("sensor, grupo: "+sensor+","+grupo);
 			for(var i=0;i<result.length;i++){
 				for(var j=0;j<result[i].length;j++){
                     if(result[i][j][1]==grupo)
-                        r.push(result[i][j][0], result[i][j][parseInt(sensor)+2]);				
+                        r.push([result[i][j][0], result[i][j][parseInt(sensor)+2]]);				
 				}
 			}
             res.json(r);
