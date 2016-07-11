@@ -75,12 +75,14 @@ telemetria.controller('graficarCtrl', function($scope, $http) {
 				var url = "http://92.222.84.155:3443";
 				$.getJSON(url + '/api/geth/' + scope.inicio + '/' + scope.fin + '/'+ grupo + '/' + sensor, function(data){
 					// Filtramos por numero de trama
+                    /*
 					var datos = [];
 					for(var i = 0; i < data.length; i++){
 						//if( data[i][1] == 4 ){
 							datos.push([data[i][0], data[i][1]]);
 						//}
 					}
+                    */
 					//scope.datos = datos;
 
 					var chart = $('#' + scope.obj.id_trama + '_' + scope.obj.offset).highcharts({
@@ -177,7 +179,7 @@ telemetria.controller('graficarCtrl', function($scope, $http) {
 						series: [{
 						type: 'area',
 						    name: scope.obj.nombre,
-	                    			    data: datos,
+                            data: data,
 						    lineWidth: 4,
 						    marker: {
 						        radius: 4
@@ -187,13 +189,15 @@ telemetria.controller('graficarCtrl', function($scope, $http) {
 
 					setInterval(function(){
 						$.getJSON(url + '/api/geth/' + scope.inicio + '/' + scope.fin + '/'+ grupo + '/' + sensor, function(data){
-							datos.length = 0;
+							/*
+                            datos.length = 0;
 							for(var i = 0; i < data.length; i++){
 								//if( data[i][1] == 4 ){
 									datos.push([data[i][0], data[i][1]]);
 								//}
 							}
-							chart.highcharts().series[0].setData(datos,true);
+                            */
+							chart.highcharts().series[0].setData(data,true);
 						});
 					},2000);
 				});
