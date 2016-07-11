@@ -81,7 +81,6 @@ console.log("sensor, grupo: "+sensor+","+grupo);
 			}
 			res.json(r2);
             */
-            res.json(r);
 		});
 	});
 	//res.sendStatus(200);
