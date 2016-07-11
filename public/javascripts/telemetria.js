@@ -24,16 +24,16 @@ telemetria.controller('graficarCtrl', function($scope, $http) {
 		$scope.diccionarioObj = [];
 		var keys = Object.keys($scope.diccionario);
 		for(var i = 0; i < keys.length; i++){
-			console.log($scope.diccionario[keys[i]]);
+			//console.log($scope.diccionario[keys[i]]);
 			var values = Object.keys($scope.diccionario[keys[i]]);
 			for(var j = 0; j < values.length; j++){
 				$scope.diccionarioObj.push({ id_trama:keys[i], offset: values[j] , nombre: $scope.diccionario[keys[i]][values[j]] });
 			}
 		}
-		console.log($scope.diccionarioObj);
+		//console.log($scope.diccionarioObj);
 	});
 	$scope.addSensors = function(sensores){
-		console.log(sensores);
+		//console.log(sensores);
 		for(var i = 0; i < sensores.length; i++){
             if ($scope.graficados.indexOf(sensores[i])==-1)
                 $scope.graficados.push(sensores[i]);
@@ -41,7 +41,7 @@ telemetria.controller('graficarCtrl', function($scope, $http) {
 		// Añadir refrescado de gráfico
 	}
 	$scope.removeSensors = function(sensores){
-		console.log(sensores);
+		//console.log(sensores);
 		for(var i = 0; i < sensores.length; i++){
             for(var j = 0; j < $scope.graficados.length; j++){
                 if(sensores[i].id_trama==$scope.graficados[j].id_trama && sensores[i].offset==$scope.graficados[j].offset)
@@ -66,7 +66,7 @@ telemetria.controller('graficarCtrl', function($scope, $http) {
         link: function (scope, element, attrs) {
         	//scope.datos = [];
 			scope.$watch('id', function(newval,oldval){
-				console.log(newval);
+				//console.log(newval);
 
 				var grupo = scope.obj.id_trama;
 				var sensor = scope.obj.offset;

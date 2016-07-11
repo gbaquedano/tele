@@ -87,8 +87,8 @@ console.log("sensor, grupo: "+sensor+","+grupo);
 router.post('/set/:horaini', function(req, res, next){
 //	console.log(req.params);
 //	console.log(req);
-	console.log(req.params.horaini);
-	console.log(req.body.datos);
+//	console.log(req.params.horaini);
+//	console.log(req.body.datos);
 	res.sendStatus(200);
 	fs.writeFile("datos/" + req.params.horaini + "_" + new Date().getTime() + ".csv", req.body.datos, function(err){
 		if(err == null){
