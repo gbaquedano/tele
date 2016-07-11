@@ -44,8 +44,6 @@ router.get('/geth/:horaini/:horafin/:grupo/:sensor', function(req, res,next){
 				selectedIni = ficheros[i];
 			}
 		}
-		console.log("MinDef:" + minDef);
-		console.log("Seleccionado de inicio:" + selectedIni.inicioRemoto);
 		for(var i=0;i<ficheros.length; i++){
             if(ficheros[i]){
                 if(ficheros[i].inicioRemoto >= selectedIni.inicioRemoto && ficheros[i].inicioRemoto <= req.params.horafin){
@@ -68,10 +66,13 @@ console.log("sensor, grupo: "+sensor+","+grupo);
 			var r = [];
 			for(var i=0;i<result.length;i++){
 				for(var j=0;j<result[i].length;j++){
-					r.push(result[i][j]);				
+                    if(result[i][j][1]==grupo)
+                        r.push(result[i][j][0], result[i][j][parseInt(sensor)+2]);				
 				}
 			}
+            res.json(r);
 //console.log("valor a escribir: "+r[1][1]);
+/*
 			var r2=[];
 			for (var k=0;k<r.length;k++){
 				if(r[k][1]==grupo){
@@ -79,6 +80,8 @@ console.log("sensor, grupo: "+sensor+","+grupo);
 				}
 			}
 			res.json(r2);
+            */
+            res.json(r);
 		});
 	});
 	//res.sendStatus(200);
