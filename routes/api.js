@@ -63,16 +63,13 @@ var sensor=req.params.sensor;
 			});
 		}, function(err,result){
 console.log("sensor, grupo: "+sensor+","+grupo);
-            var tiempos = [];
-            var valores = [];
+			var r = [];
 			for(var i=0;i<result.length;i++){
 				for(var j=0;j<result[i].length;j++){
                     if(result[i][j][1]==grupo)
-                        tiempos.push(result[i][j][0]);
-                        valores.push(result[i][j][parseInt(sensor)+2]);				
+                        r.push([result[i][j][0], result[i][j][parseInt(sensor)+2]]);				
 				}
 			}
-            var r=[tiempos,valores];
             res.json(r);
 //console.log("valor a escribir: "+r[1][1]);
 /*
