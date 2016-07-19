@@ -5,6 +5,32 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var telemongo = new require('./telemongo').cliente();
+
+
+console.time('inicio');
+telemongo.Dato.find({}).where('fecha').gt(0).lt(10001).exec(function(err2, res2){
+    console.timeEnd('inicio');
+    console.log(res2.length);
+});
+console.time('inicio2')
+telemongo.Dato.find({grupo:3, posicion:3}).where('fecha').gt(1000).lt(19000).exec(function(err2, res2){
+    console.timeEnd('inicio2');
+    console.log(res2.length);
+});
+
+//telemongo.Dato.remove({}, function(err, res){
+//});
+
+/*
+for(var i = 0; i < 20000; i++){
+  var j = i;
+  telemongo.Dato.create(new telemongo.Dato({grupo:i%20, posicion:(i%10),fecha:i}), function(err1,res1){
+    //console.log(err1);
+    console.log(j);
+  });
+}*/
+
 var routes = require('./routes/index');
 var api = require('./routes/api');
 var users = require('./routes/users');

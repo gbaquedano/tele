@@ -5,8 +5,12 @@ var csv = require('csv');
 var glob = require('glob');
 var async = require('async');
 var router = express.Router();
-
+var telemongo = require('./../telemongo').cliente();
 /* GET users listing. */
+
+
+console.log(telemongo.estado);
+
 
 router.get('/set/:horaini/:horafin', function(req, res, next){
 	res.json(req.params);
